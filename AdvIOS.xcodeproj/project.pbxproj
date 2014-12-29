@@ -1,0 +1,237 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		D388D1A21A51C0620086975F /* AdvIOS */ = {isa = PBXFileReference; explicitFileType = folder; includeInIndex = 0; path = AdvIOS; sourceTree = BUILT_PRODUCTS_DIR; };
+		D388D1A61A51C0620086975F /* ContentInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ContentInfo.plist; sourceTree = "<group>"; };
+		D388D1B71A51C17E0086975F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D388D1B81A51C17E0086975F /* adv0.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = adv0.h; sourceTree = "<group>"; };
+		D388D1B91A51C17E0086975F /* adv1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = adv1.h; sourceTree = "<group>"; };
+		D388D1BA1A51C17E0086975F /* adv01.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = adv01.c; sourceTree = "<group>"; };
+		D388D1BB1A51C17E0086975F /* ios.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ios.h; sourceTree = "<group>"; };
+		D388D1BC1A51C17E0086975F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		D388D1BD1A51C17E0086975F /* advio.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = advio.h; sourceTree = "<group>"; };
+		D388D1BE1A51C17E0086975F /* advio.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = advio.m; sourceTree = "<group>"; };
+		D388D1BF1A51C5350086975F /* adv00.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = adv00.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		D388D19B1A51C0620086975F = {
+			isa = PBXGroup;
+			children = (
+				D388D1A41A51C0620086975F /* AdvIOS */,
+				D388D1A31A51C0620086975F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D388D1A31A51C0620086975F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D388D1A21A51C0620086975F /* AdvIOS */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D388D1A41A51C0620086975F /* AdvIOS */ = {
+			isa = PBXGroup;
+			children = (
+				D388D1B71A51C17E0086975F /* ViewController.m */,
+				D388D1BC1A51C17E0086975F /* ViewController.h */,
+				D388D1B81A51C17E0086975F /* adv0.h */,
+				D388D1BF1A51C5350086975F /* adv00.c */,
+				D388D1B91A51C17E0086975F /* adv1.h */,
+				D388D1BA1A51C17E0086975F /* adv01.c */,
+				D388D1BB1A51C17E0086975F /* ios.h */,
+				D388D1BD1A51C17E0086975F /* advio.h */,
+				D388D1BE1A51C17E0086975F /* advio.m */,
+				D388D1A51A51C0620086975F /* Supporting Files */,
+			);
+			path = AdvIOS;
+			sourceTree = "<group>";
+		};
+		D388D1A51A51C0620086975F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D388D1A61A51C0620086975F /* ContentInfo.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D388D1A11A51C0620086975F /* AdvIOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D388D1A91A51C0620086975F /* Build configuration list for PBXNativeTarget "AdvIOS" */;
+			buildPhases = (
+				D388D1A01A51C0620086975F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AdvIOS;
+			productName = AdvIOS;
+			productReference = D388D1A21A51C0620086975F /* AdvIOS */;
+			productType = "com.apple.product-type.in-app-purchase-content";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D388D19C1A51C0620086975F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = Brian;
+				TargetAttributes = {
+					D388D1A11A51C0620086975F = {
+						CreatedOnToolsVersion = 6.1;
+					};
+				};
+			};
+			buildConfigurationList = D388D19F1A51C0620086975F /* Build configuration list for PBXProject "AdvIOS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D388D19B1A51C0620086975F;
+			productRefGroup = D388D1A31A51C0620086975F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D388D1A11A51C0620086975F /* AdvIOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D388D1A01A51C0620086975F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D388D1A71A51C0620086975F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+			};
+			name = Debug;
+		};
+		D388D1A81A51C0620086975F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+			};
+			name = Release;
+		};
+		D388D1AA1A51C0620086975F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = AdvIOS/ContentInfo.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/InAppPurchaseContent";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = "";
+			};
+			name = Debug;
+		};
+		D388D1AB1A51C0620086975F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = AdvIOS/ContentInfo.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/InAppPurchaseContent";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D388D19F1A51C0620086975F /* Build configuration list for PBXProject "AdvIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D388D1A71A51C0620086975F /* Debug */,
+				D388D1A81A51C0620086975F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D388D1A91A51C0620086975F /* Build configuration list for PBXNativeTarget "AdvIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D388D1AA1A51C0620086975F /* Debug */,
+				D388D1AB1A51C0620086975F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D388D19C1A51C0620086975F /* Project object */;
+}
