@@ -9,11 +9,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController <UITextFieldDelegate>
+@interface ViewController : UIViewController <UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIStepper *stepperOutlet;
 - (IBAction)stepperAction:(id)sender;
-@property (weak, nonatomic) IBOutlet UITextField *myTextField;
+
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic)IBOutlet UIView *_portraitView;
+@property (weak, nonatomic)IBOutlet UIView *_landscapeView;
+@property (weak, nonatomic)UIView *_currentView;
 
 @end
+
+
 

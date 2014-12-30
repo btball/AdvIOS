@@ -1738,8 +1738,9 @@ void format_buffer (int terminate, int html)
             if (html)
             {
                if (*iptr != CENTRE_START) 
-                 oputs ("<table align=center><tr><td>\n");
-               else oputs("<div align=center>\n");
+                 oputs ("<table align=center width=automatic><tr><td>\n");
+               else 
+                 oputs("<div align=center>\n");
                if (*iptr == QUOTE_START) oputs ("<pre>");
             }
             type = *iptr;

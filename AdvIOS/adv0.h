@@ -12,11 +12,8 @@
 #endif
 
 #ifdef IOS
-#  ifndef ADVLIB
-#    define ADVLIB
-#  endif
-#  include "ios.h"
-#endif /* IOS */
+#  define move adv_move
+#endif
 
 #ifdef FILE
 #  undef FILE

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -10,15 +11,18 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="XjM-So-uYc"/>
+                        <viewControllerLayoutGuide type="bottom" id="4Qz-wb-PPd"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <userGuides>
+                            <userLayoutGuide location="1016" affinity="minX"/>
+                        </userGuides>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="?" textAlignment="natural" minimumFontSize="14" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Q5j-kE-bRe">
-                                <rect key="frame" x="169" y="470" width="242" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="?" textAlignment="natural" minimumFontSize="14" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Q5j-kE-bRe">
+                                <rect key="frame" x="166" y="536" width="406" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
@@ -26,8 +30,8 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="ke2-3w-iwc"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Avv-ne-TXf">
-                                <rect key="frame" x="353" y="526" width="68" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Avv-ne-TXf">
+                                <rect key="frame" x="444" y="601" width="58" height="30"/>
                                 <state key="normal" title="View log">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -35,8 +39,18 @@
                                     <action selector="viewLog:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X4T-wN-jBi"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WyH-Pl-iZy">
-                                <rect key="frame" x="179" y="526" width="74" height="30"/>
+                            <webView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dxF-22-bkP">
+                                <rect key="frame" x="10" y="28" width="728" height="495"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" autorepeat="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dt-Ji-RyD">
+                                <rect key="frame" x="273" y="602" width="94" height="29"/>
+                                <connections>
+                                    <action selector="stepperAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="AZe-SN-zb2"/>
+                                </connections>
+                            </stepper>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WyH-Pl-iZy">
+                                <rect key="frame" x="174" y="601" width="74" height="30"/>
                                 <state key="normal" title="Quit">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -44,41 +58,35 @@
                                     <action selector="restart:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9ft-mB-sCY"/>
                                 </connections>
                             </button>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" autorepeat="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dt-Ji-RyD">
-                                <rect key="frame" x="419" y="471" width="94" height="29"/>
-                                <connections>
-                                    <action selector="stepperAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="AZe-SN-zb2"/>
-                                </connections>
-                            </stepper>
-                            <textView opaque="NO" clipsSubviews="YES" contentMode="TopLeft" ambiguous="YES" misplaced="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" text="abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij" translatesAutoresizingMaskIntoConstraints="NO" id="5Ak-Wk-nc2">
-                                <rect key="frame" x="0.0" y="50" width="674" height="382"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <inset key="scrollIndicatorInsets" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
-                                <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                                <attributedString key="userComments">
-                                    <fragment content="abcdef">
-                                        <attributes>
-                                            <font key="NSFont" metaFont="smallSystem"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="5Ak-Wk-nc2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="HXm-FU-umE"/>
+                            <constraint firstItem="4Qz-wb-PPd" firstAttribute="top" secondItem="6dt-Ji-RyD" secondAttribute="bottom" constant="393" id="7AM-nl-YOF"/>
+                            <constraint firstItem="dxF-22-bkP" firstAttribute="top" secondItem="XjM-So-uYc" secondAttribute="bottom" id="7KW-EL-soz"/>
+                            <constraint firstAttribute="centerX" secondItem="dxF-22-bkP" secondAttribute="centerX" id="HGq-2O-ZK8"/>
+                            <constraint firstItem="4Qz-wb-PPd" firstAttribute="top" secondItem="WyH-Pl-iZy" secondAttribute="bottom" constant="393" id="Hpe-xD-K6L"/>
+                            <constraint firstItem="dxF-22-bkP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-4" id="Krt-V4-SFk"/>
+                            <constraint firstItem="WyH-Pl-iZy" firstAttribute="top" secondItem="Q5j-kE-bRe" secondAttribute="bottom" constant="35" id="RxR-9l-11Q"/>
+                            <constraint firstItem="4Qz-wb-PPd" firstAttribute="top" secondItem="Avv-ne-TXf" secondAttribute="bottom" constant="393" id="RxX-Lz-ikC"/>
+                            <constraint firstItem="6dt-Ji-RyD" firstAttribute="top" secondItem="Q5j-kE-bRe" secondAttribute="bottom" constant="36" id="q9i-tj-ycc"/>
+                            <constraint firstItem="Avv-ne-TXf" firstAttribute="top" secondItem="Q5j-kE-bRe" secondAttribute="bottom" constant="35" id="vwM-2C-qAC"/>
+                            <constraint firstItem="Q5j-kE-bRe" firstAttribute="top" secondItem="dxF-22-bkP" secondAttribute="bottom" constant="13" id="wNn-EE-XZq"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="myConsoleDisplay" destination="5Ak-Wk-nc2" id="vWw-Zf-PYY"/>
                         <outlet property="myTextField" destination="Q5j-kE-bRe" id="CbX-ad-VMc"/>
                         <outlet property="stepperOutlet" destination="6dt-Ji-RyD" id="wrV-rF-RbZ"/>
+                        <outlet property="webView" destination="dxF-22-bkP" id="QhF-nF-MYa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="121" y="33"/>
         </scene>
     </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
 </document>

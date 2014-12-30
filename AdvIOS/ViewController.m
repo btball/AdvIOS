@@ -8,6 +8,7 @@
 //
 #include <stdio.h>
 #import "ViewController.h"
+#import "version.h"
 char *advturn(char*);
 char cmd[160] ={0};
 char buf[160] = {0};
@@ -19,6 +20,8 @@ int first_stop = 0;
 char *hist[maxhist+1][160] = {0};
 char *command[160] = {0};
 NSInteger oldValue;
+NSString *html_break = @"<br><br>";
+NSMutableString *htmlString;
 char *logIO = 0;
 int buflen = 160;
 int bufptr = 0;  // offset for "next" copy into the buffer
@@ -27,11 +30,11 @@ int realloc_len = 160; // initial value doesn't matter - this will be computed e
 
 @interface ViewController ()
 
-
-@property (weak, nonatomic) IBOutlet UITextView *myConsoleDisplay;
 - (IBAction)viewLog:(id)sender;
 - (IBAction)restart:(id)sender;
 - (IBAction)editingChanged:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *myTextField;
+
 
 
 @end
@@ -52,7 +55,7 @@ void advlog (char *logline){
     }
 }
 char * advNewGame (void){
-    strcpy(cmd, "_START_TEXT_adv770");
+    strcpy(cmd, adv_version);
     first_stop = 0;
     return advturn(cmd);
 }
@@ -63,6 +66,7 @@ char * advNewGame (void){
     [self.myTextField becomeFirstResponder];
     oldValue = stepperOutlet.value;
     // First call goes here
+    
     histCount = 0;
     logIO = malloc(buflen + 1);  // Initial allocation
     memset(&hist[0], 0, sizeof(hist));
@@ -72,7 +76,8 @@ char * advNewGame (void){
     bufptr = 0;
     rptr = advNewGame();
     advlog(rptr+1);
-    _myConsoleDisplay.text = [NSString stringWithFormat:@"%s",rptr+1];
+    NSString *htmlString = [NSString stringWithFormat:@"%s",rptr+1];
+    [self.webView loadHTMLString:htmlString baseURL:nil];
     self.myTextField.text = @"?";
 
 }
@@ -90,20 +95,15 @@ char * advNewGame (void){
         bufptr = 0;
         rptr = advNewGame();
         advlog (rptr+1);
-        _myConsoleDisplay.text = [NSString stringWithFormat:@"%s",rptr+1];
+        NSString *obuf = [NSString stringWithFormat:@"%s",rptr+1];
+        htmlString = [htmlString stringByAppendingString:obuf];
+        [self.webView loadHTMLString:htmlString baseURL:nil];
         _myTextField.text = @"?";
         [self.myTextField becomeFirstResponder];
         return YES;
         
     }
     strcpy(inp ,[self.myTextField.text UTF8String]);
-    /*
-    if (inp[0] == '?')
-        memmove( inp,  inp+1, strlen( inp));
-    if (strlen(inp) == 0) {
-        strcat(inp,"\n");
-    }
-     */
 // Make sure I don't overflow history
     if (histCount == maxhist){
         int ix = 0;
@@ -114,9 +114,10 @@ char * advNewGame (void){
         histCount = histCount - 1;
     }
     strcpy(hist[histCount], inp+1);
-//    strcat(inp, "\n");
-    advlog(inp+1);
-    advlog("\n");
+    advlog("<p style = 'color:red'>");
+    advlog(inp);
+    advlog("</p>");
+    advlog("<br>");
     histCount = histCount +1;
     stepperOutlet.maximumValue = histCount;
     stepperOutlet.value = histCount;
@@ -125,8 +126,15 @@ char * advNewGame (void){
     rptr = advturn(cmd);
     advlog(rptr+1);
     if (*rptr != 'f') {
-    _myConsoleDisplay.text = [NSString stringWithFormat:@"%s",rptr+1];
-    self.myTextField.text = @"?";
+//        NSString *htmlString = [[NSString alloc] initWithUTF8String:rptr+1];
+        NSString *obuf = [NSString stringWithFormat:@"%s",rptr+1];
+        NSString *htmlString = @"<p style = 'color:red'>";
+        htmlString  =  [htmlString stringByAppendingString:self.myTextField.text];
+        htmlString = [htmlString stringByAppendingString:@"</p>"];
+        htmlString  = [htmlString stringByAppendingString:html_break];
+        htmlString = [htmlString stringByAppendingString:obuf];
+        [self.webView loadHTMLString:htmlString baseURL:nil];
+        self.myTextField.text = @"?";
         [self.myTextField becomeFirstResponder];
         return YES;
     }
@@ -134,7 +142,8 @@ char * advNewGame (void){
         if (first_stop == 0) {
             // First time through display the score and final message
             first_stop = 1;
-            _myConsoleDisplay.text = [NSString stringWithFormat:@"%s",rptr+1];
+            NSString *htmlString = [NSString stringWithFormat:@"%s",rptr+1];
+            [self.webView loadHTMLString:htmlString baseURL:nil];
             self.myTextField.text = @"?";
             [self.myTextField becomeFirstResponder];
             return YES;
@@ -148,7 +157,8 @@ char * advNewGame (void){
         bufptr = 0;
         rptr = advNewGame();
         advlog (rptr+1);
-        _myConsoleDisplay.text = [NSString stringWithFormat:@"%s",rptr+1];
+        NSString *htmlString = [NSString stringWithFormat:@"%s",rptr+1];
+        [self.webView loadHTMLString:htmlString baseURL:nil];
         _myTextField.text = @"?";
         [self.myTextField becomeFirstResponder];
         return YES;
@@ -180,8 +190,10 @@ char * advNewGame (void){
 - (IBAction)viewLog:(id)sender {
 
     NSString * displayBuf = [[NSString alloc]init];
-    displayBuf =  [NSString stringWithFormat:@"%s\n",logIO];
-    _myConsoleDisplay.text = displayBuf;
+//    displayBuf =  [NSString stringWithFormat:@"%s\n",logIO];
+    NSString *htmlString = [NSString stringWithFormat:@"%s",logIO];
+    [self.webView loadHTMLString:htmlString baseURL:nil];
+//    _myConsoleDisplay.text = displayBuf;
 
 }
 
@@ -195,7 +207,8 @@ char * advNewGame (void){
         bufptr = 0;
         rptr = advNewGame();
         advlog (rptr+1);
-        _myConsoleDisplay.text = [NSString stringWithFormat:@"%s",rptr+1];
+        NSString *htmlString = [NSString stringWithFormat:@"%s",rptr+1];
+        [self.webView loadHTMLString:htmlString baseURL:nil];
         _myTextField.text = @"?";
         [self.myTextField becomeFirstResponder];
         return ;
@@ -203,7 +216,8 @@ char * advNewGame (void){
         strcpy(cmd, "q");
         rptr = advturn(cmd);
         advlog(rptr+1);
-        _myConsoleDisplay.text = [NSString stringWithFormat:@"%s",rptr+1];
+        NSString *htmlString = [NSString stringWithFormat:@"%s",rptr+1];
+        [self.webView loadHTMLString:htmlString baseURL:nil];
         _myTextField.text = @"?";
     }
 
