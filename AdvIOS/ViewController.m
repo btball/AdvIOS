@@ -27,6 +27,14 @@ int buflen = 160;
 int bufptr = 0;  // offset for "next" copy into the buffer
 int len = 0;  // Used for the size of what advturn returns to me
 int realloc_len = 160; // initial value doesn't matter - this will be computed each time
+int fontSize = 100; // default to 100%
+char fontPct[3]; // font size in character form
+
+/*
+
+ sprintf(fontPct, "%d", fontSize);
+ 
+ */
 
 @interface ViewController ()
 
@@ -41,6 +49,8 @@ int realloc_len = 160; // initial value doesn't matter - this will be computed e
 
 @implementation ViewController
 @synthesize stepperOutlet;
+@synthesize segmentedControl;
+
 
 void advlog (char *logline){
     len = strlen(logline);
@@ -66,7 +76,6 @@ char * advNewGame (void){
     [self.myTextField becomeFirstResponder];
     oldValue = stepperOutlet.value;
     // First call goes here
-    
     histCount = 0;
     logIO = malloc(buflen + 1);  // Initial allocation
     memset(&hist[0], 0, sizeof(hist));
@@ -76,7 +85,13 @@ char * advNewGame (void){
     bufptr = 0;
     rptr = advNewGame();
     advlog(rptr+1);
-    NSString *htmlString = [NSString stringWithFormat:@"%s",rptr+1];
+    NSString *obuf = [NSString stringWithFormat:@"%s",rptr+1];
+    sprintf(fontPct, "%d", fontSize);
+    NSString *htmlString = @"<p style = 'font-size:";
+    htmlString = [htmlString stringByAppendingString:[NSString stringWithUTF8String:fontPct]];
+    htmlString = [htmlString stringByAppendingString:@"%'>"];
+    htmlString  =  [htmlString stringByAppendingString:obuf];
+    htmlString = [htmlString stringByAppendingString:@"</p>"];
     [self.webView loadHTMLString:htmlString baseURL:nil];
     self.myTextField.text = @"?";
 
@@ -88,6 +103,7 @@ char * advNewGame (void){
     if (first_stop == 1) {
         first_stop = 0;
         histCount = 0;
+        fontSize = 100;
         memset(&hist[0], 0, sizeof(hist));
         oldValue = 0;
         stepperOutlet.value = 0;
@@ -96,7 +112,12 @@ char * advNewGame (void){
         rptr = advNewGame();
         advlog (rptr+1);
         NSString *obuf = [NSString stringWithFormat:@"%s",rptr+1];
-        htmlString = [htmlString stringByAppendingString:obuf];
+        sprintf(fontPct, "%d", fontSize);
+        NSString *htmlString = @"<p style = 'font-size:";
+        htmlString = [htmlString stringByAppendingString:[NSString stringWithUTF8String:fontPct]];
+        htmlString = [htmlString stringByAppendingString:@"%'>"];
+        htmlString  =  [htmlString stringByAppendingString:obuf];
+        htmlString = [htmlString stringByAppendingString:@"</p>"];
         [self.webView loadHTMLString:htmlString baseURL:nil];
         _myTextField.text = @"?";
         [self.myTextField becomeFirstResponder];
@@ -114,9 +135,9 @@ char * advNewGame (void){
         histCount = histCount - 1;
     }
     strcpy(hist[histCount], inp+1);
-    advlog("<p style = 'color:red'>");
+    advlog("<font color='ff0000'>");
     advlog(inp);
-    advlog("</p>");
+    advlog("</font>");
     advlog("<br>");
     histCount = histCount +1;
     stepperOutlet.maximumValue = histCount;
@@ -126,13 +147,19 @@ char * advNewGame (void){
     rptr = advturn(cmd);
     advlog(rptr+1);
     if (*rptr != 'f') {
-//        NSString *htmlString = [[NSString alloc] initWithUTF8String:rptr+1];
+        sprintf(fontPct, "%d", fontSize);
         NSString *obuf = [NSString stringWithFormat:@"%s",rptr+1];
-        NSString *htmlString = @"<p style = 'color:red'>";
-        htmlString  =  [htmlString stringByAppendingString:self.myTextField.text];
+        NSString *htmlString = @"<p style = 'color:red; font-size:";
+        htmlString = [htmlString stringByAppendingString:[NSString stringWithUTF8String:fontPct]];
+        htmlString = [htmlString stringByAppendingString:@"%'>"];
+        htmlString = [htmlString stringByAppendingString:self.myTextField.text];
         htmlString = [htmlString stringByAppendingString:@"</p>"];
-        htmlString  = [htmlString stringByAppendingString:html_break];
+        htmlString = [htmlString stringByAppendingString:html_break];
+        htmlString = [htmlString stringByAppendingString:@"<p style = 'font-size:"];
+        htmlString = [htmlString stringByAppendingString:[NSString stringWithUTF8String:fontPct]];
+        htmlString = [htmlString stringByAppendingString:@"%'>"];
         htmlString = [htmlString stringByAppendingString:obuf];
+        htmlString = [htmlString stringByAppendingString:@"</p>"];
         [self.webView loadHTMLString:htmlString baseURL:nil];
         self.myTextField.text = @"?";
         [self.myTextField becomeFirstResponder];
@@ -142,7 +169,12 @@ char * advNewGame (void){
         if (first_stop == 0) {
             // First time through display the score and final message
             first_stop = 1;
-            NSString *htmlString = [NSString stringWithFormat:@"%s",rptr+1];
+            sprintf(fontPct, "%d", fontSize);
+            NSString *obuf = [NSString stringWithFormat:@"%s",rptr+1];
+            NSString *htmlString = @"<p style = 'font-size:";
+            htmlString = [htmlString stringByAppendingString:[NSString stringWithUTF8String:fontPct]];
+            htmlString = [htmlString stringByAppendingString:@"%'>"];
+            htmlString = [htmlString stringByAppendingString:obuf];
             [self.webView loadHTMLString:htmlString baseURL:nil];
             self.myTextField.text = @"?";
             [self.myTextField becomeFirstResponder];
@@ -189,9 +221,15 @@ char * advNewGame (void){
 
 - (IBAction)viewLog:(id)sender {
 
-    NSString * displayBuf = [[NSString alloc]init];
-//    displayBuf =  [NSString stringWithFormat:@"%s\n",logIO];
-    NSString *htmlString = [NSString stringWithFormat:@"%s",logIO];
+
+    NSString *obuf = [NSString stringWithFormat:@"%s",logIO];
+    sprintf(fontPct, "%d", fontSize);
+    NSString *htmlString = @"<p style = 'font-size:";
+    htmlString = [htmlString stringByAppendingString:[NSString stringWithUTF8String:fontPct]];
+    htmlString = [htmlString stringByAppendingString:@"%'>"];
+    htmlString  =  [htmlString stringByAppendingString:obuf];
+    htmlString = [htmlString stringByAppendingString:@"</p>"];
+
     [self.webView loadHTMLString:htmlString baseURL:nil];
 //    _myConsoleDisplay.text = displayBuf;
 
@@ -200,6 +238,7 @@ char * advNewGame (void){
 - (IBAction)restart:(id)sender {
     if (first_stop == 1){
         histCount = 0;
+        fontSize = 100;
         memset(&hist[0], 0, sizeof(hist));
         oldValue = 0;
         stepperOutlet.value = 0;
@@ -207,7 +246,13 @@ char * advNewGame (void){
         bufptr = 0;
         rptr = advNewGame();
         advlog (rptr+1);
-        NSString *htmlString = [NSString stringWithFormat:@"%s",rptr+1];
+        NSString *obuf = [NSString stringWithFormat:@"%s",rptr+1];
+        sprintf(fontPct, "%d", fontSize);
+        NSString *htmlString = @"<p style = 'font-size:";
+        htmlString = [htmlString stringByAppendingString:[NSString stringWithUTF8String:fontPct]];
+        htmlString = [htmlString stringByAppendingString:@"%'>"];
+        htmlString  =  [htmlString stringByAppendingString:obuf];
+        htmlString = [htmlString stringByAppendingString:@"</p>"];
         [self.webView loadHTMLString:htmlString baseURL:nil];
         _myTextField.text = @"?";
         [self.myTextField becomeFirstResponder];
@@ -216,7 +261,13 @@ char * advNewGame (void){
         strcpy(cmd, "q");
         rptr = advturn(cmd);
         advlog(rptr+1);
-        NSString *htmlString = [NSString stringWithFormat:@"%s",rptr+1];
+        NSString *obuf = [NSString stringWithFormat:@"%s",rptr+1];
+        sprintf(fontPct, "%d", fontSize);
+        NSString *htmlString = @"<p style = 'font-size:";
+        htmlString = [htmlString stringByAppendingString:[NSString stringWithUTF8String:fontPct]];
+        htmlString = [htmlString stringByAppendingString:@"%'>"];
+        htmlString  =  [htmlString stringByAppendingString:obuf];
+        htmlString = [htmlString stringByAppendingString:@"</p>"];
         [self.webView loadHTMLString:htmlString baseURL:nil];
         _myTextField.text = @"?";
     }
@@ -240,4 +291,112 @@ char * advNewGame (void){
         strcat(command, hist[oldValue]);
         self.myTextField.text = [NSString stringWithCString:command encoding:[NSString defaultCStringEncoding]];
 }
+
+
+
+
+- (IBAction)indexChanged:(UISegmentedControl *)sender {
+    switch (self.segmentedControl.selectedSegmentIndex)
+    {
+        case 0:
+            printf("First Selected\n");
+            if (fontSize < 400) {fontSize = fontSize + 10;} // increase by 10%
+            printf("font size = %d\n", fontSize);
+            break;
+        case 1:
+            printf("Second Selected\n");
+            if (fontSize > 20) {fontSize = fontSize - 10;} // decrease by 10%
+            printf("font size = %d\n", fontSize);
+            break;
+        default: 
+            break; 
+    }
+}
+
+
+- (void)advMove {
+    strcpy(hist[histCount], cmd);
+    advlog("<font color='ff0000'>");
+    advlog("?");
+    advlog(cmd);
+    advlog("</font>");
+    advlog("<br>");
+    histCount = histCount +1;
+    stepperOutlet.maximumValue = histCount;
+    stepperOutlet.value = histCount;
+    oldValue = histCount;
+    rptr = advturn(cmd);
+    advlog(rptr+1);
+    sprintf(fontPct, "%d", fontSize);
+    NSString *obuf = [NSString stringWithFormat:@"%s",rptr+1];
+    NSString *direction = [NSString stringWithFormat:@"%s",cmd];
+    NSString *htmlString = @"<p style = 'color:red; font-size:";
+    htmlString = [htmlString stringByAppendingString:[NSString stringWithUTF8String:fontPct]];
+    htmlString = [htmlString stringByAppendingString:@"%'>"];
+    htmlString = [htmlString stringByAppendingString:direction];
+    htmlString = [htmlString stringByAppendingString:@"</p>"];
+    htmlString = [htmlString stringByAppendingString:html_break];
+    htmlString = [htmlString stringByAppendingString:@"<p style = 'font-size:"];
+    htmlString = [htmlString stringByAppendingString:[NSString stringWithUTF8String:fontPct]];
+    htmlString = [htmlString stringByAppendingString:@"%'>"];
+    htmlString = [htmlString stringByAppendingString:obuf];
+    htmlString = [htmlString stringByAppendingString:@"</p>"];
+    [self.webView loadHTMLString:htmlString baseURL:nil];
+    _myTextField.text = @"?";
+}
+
+- (IBAction)north:(id)sender {
+    strcpy(cmd, "N");
+    [self advMove];
+
+}
+
+
+- (IBAction)east:(id)sender {
+    strcpy(cmd, "E");
+    [self advMove];
+
+    
+}
+
+- (IBAction)west:(id)sender {
+    strcpy(cmd, "W");
+    [self advMove];
+
+}
+
+
+- (IBAction)se:(id)sender {
+    strcpy(cmd, "SE");
+    [self advMove];
+
+}
+
+- (IBAction)nw:(id)sender {
+    strcpy(cmd, "NW");
+    [self advMove];
+
+}
+
+- (IBAction)sw:(id)sender {
+    strcpy(cmd, "SW");
+    [self advMove];
+
+}
+
+- (IBAction)ne:(id)sender {
+    strcpy(cmd, "NE");
+    [self advMove];
+}
+
+- (IBAction)south:(id)sender {
+    strcpy(cmd, "S");
+    [self advMove];
+    
+}
+
+
+
+
 @end
+

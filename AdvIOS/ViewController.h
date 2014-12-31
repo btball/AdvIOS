@@ -15,9 +15,19 @@
 - (IBAction)stepperAction:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
-@property (weak, nonatomic)IBOutlet UIView *_portraitView;
-@property (weak, nonatomic)IBOutlet UIView *_landscapeView;
-@property (weak, nonatomic)UIView *_currentView;
+
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+
+- (IBAction)indexChanged:(UISegmentedControl *)sender;
+
+- (IBAction)north:(id)sender;
+- (IBAction)east:(id)sender;
+- (IBAction)west:(id)sender;
+- (IBAction)se:(id)sender;
+- (IBAction)nw:(id)sender;
+- (IBAction)sw:(id)sender;
+- (IBAction)ne:(id)sender;
+- (IBAction)south:(id)sender;
 
 @end
 
