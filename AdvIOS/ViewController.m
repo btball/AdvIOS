@@ -9,8 +9,13 @@
 #include <stdio.h>
 #import "ViewController.h"
 #import "version.h"
+#import <MessageUI/MessageUI.h>  // For emailing log 
 char *advturn(char*);
 char cmd[160] ={0};
+const char font_color[] = "<font color='ff0000'>";
+const char question_mark[] = "?";
+const char font_tag[] = "</font>";
+const char break_tag[] = "<br>";
 char buf[160] = {0};
 char inp[160]= {0};
 char *rptr = 0;
@@ -53,20 +58,25 @@ char fontPct[3]; // font size in character form
 
 
 void advlog (char *logline){
+    if (logIO == NULL) {
+        printf("logIO not allocated - no logging possible \n");
+        return;} // No logging possible
     len = strlen(logline);
     realloc_len = bufptr + len;
     realloc_len = realloc_len + 1;
+    // debug only printf(" abt to realloc - logline = %s, realloc_len = %d, logIO = %s \n", logline, realloc_len, logIO);
     logIO = realloc (logIO, realloc_len);
     if (logIO != NULL){
         // We could probably do more here - but for now, if I can't realloc, then we'll just skip logging!
         strcpy(logIO+bufptr, logline);
-        bufptr = bufptr + len;
+        bufptr = bufptr + len;}
     if (logIO == NULL) {printf("realloc failed, not able to log!\n");}
     }
-}
+
 char * advNewGame (void){
     strcpy(cmd, adv_version);
     first_stop = 0;
+    printf("calling advturn\n");
     return advturn(cmd);
 }
 
@@ -78,6 +88,7 @@ char * advNewGame (void){
     // First call goes here
     histCount = 0;
     logIO = malloc(buflen + 1);  // Initial allocation
+    if (logIO == NULL) {printf("initial allocation for logging failed \n");}
     memset(&hist[0], 0, sizeof(hist));
     oldValue = 0;
     stepperOutlet.value = 0;
@@ -144,6 +155,7 @@ char * advNewGame (void){
     stepperOutlet.value = histCount;
     oldValue = histCount;
     strcpy(cmd, inp+1);
+    printf("calling advturn\n");
     rptr = advturn(cmd);
     advlog(rptr+1);
     if (*rptr != 'f') {
@@ -259,6 +271,7 @@ char * advNewGame (void){
         return ;
     }
         strcpy(cmd, "q");
+        printf("calling advturn\n");
         rptr = advturn(cmd);
         advlog(rptr+1);
         NSString *obuf = [NSString stringWithFormat:@"%s",rptr+1];
@@ -315,16 +328,26 @@ char * advNewGame (void){
 
 
 - (void)advMove {
+    printf("calling advmove\n");
+    if (histCount == maxhist){
+        int ix = 0;
+        while (ix<maxhist){
+            strcpy(hist[ix],hist[ix+1]);  // roll off the oldest entry
+            ix = ix+1;
+        }
+        histCount = histCount - 1;
+    }
     strcpy(hist[histCount], cmd);
-    advlog("<font color='ff0000'>");
-    advlog("?");
+    advlog(font_color);
+    advlog(question_mark);
     advlog(cmd);
-    advlog("</font>");
-    advlog("<br>");
+    advlog(font_tag);
+    advlog(break_tag);
     histCount = histCount +1;
     stepperOutlet.maximumValue = histCount;
     stepperOutlet.value = histCount;
     oldValue = histCount;
+    printf("calling advturn\n");
     rptr = advturn(cmd);
     advlog(rptr+1);
     sprintf(fontPct, "%d", fontSize);
@@ -395,6 +418,48 @@ char * advNewGame (void){
     
 }
 
+- (IBAction)sendEmailAction:(UIButton *)sender
+{
+    if ([MFMailComposeViewController canSendMail])
+    {
+        MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
+        mail.mailComposeDelegate = self;
+        [mail setSubject:@"Adventure log attached"];
+        [mail setMessageBody:@"Adventure log attached" isHTML:NO];
+        [mail setToRecipients:@[@"yourEmail@example.com"]];
+        NSString *NSlogIO = [NSString stringWithFormat:@"%s",logIO];
+        NSData *logData = [NSlogIO dataUsingEncoding:NSUTF8StringEncoding];
+        [mail addAttachmentData:logData mimeType:@"text/html" fileName:@"adventure.html"];
+        [self presentViewController:mail animated:YES completion:NULL];
+    }
+    else
+    {
+        NSLog(@"This device cannot send email");
+    }
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result) {
+        case MFMailComposeResultSent:
+            NSLog(@"You sent the email.");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"You saved a draft of this email");
+            break;
+        case MFMailComposeResultCancelled:
+            NSLog(@"You cancelled sending this email.");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail failed:  An error occurred when trying to compose this email");
+            break;
+        default:
+            NSLog(@"An error occurred when trying to compose this email");
+            break;
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
 
 
 

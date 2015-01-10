@@ -28,6 +28,7 @@
 - (IBAction)sw:(id)sender;
 - (IBAction)ne:(id)sender;
 - (IBAction)south:(id)sender;
+- (IBAction)sendEmailAction:(id)sender;
 
 @end
 

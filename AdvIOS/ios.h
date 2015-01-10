@@ -19,4 +19,8 @@
 #define move adv_move
 #define opendir advopendir
 #define readdir advreaddir
+#ifdef DEBUG
+#  undef DEBUG
 #endif
+#endif
+

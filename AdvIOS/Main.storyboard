@@ -145,6 +145,15 @@
                                     <action selector="south:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X76-4V-Wi0"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0EW-ec-rXP">
+                                <rect key="frame" x="441" y="601" width="62" height="32"/>
+                                <state key="normal" title="eMail log">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendEmailAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Ma-jP-Tqn"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXB-77-5jv">
                                 <rect key="frame" x="676" y="571" width="30" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
@@ -163,9 +172,11 @@
                             <constraint firstItem="FXB-77-5jv" firstAttribute="leading" secondItem="3wq-w0-drA" secondAttribute="trailing" constant="54" id="0no-27-2Gn"/>
                             <constraint firstItem="4Qz-wb-PPd" firstAttribute="top" secondItem="6dt-Ji-RyD" secondAttribute="bottom" constant="393" id="7AM-nl-YOF"/>
                             <constraint firstItem="dxF-22-bkP" firstAttribute="top" secondItem="XjM-So-uYc" secondAttribute="bottom" id="7KW-EL-soz"/>
+                            <constraint firstItem="0EW-ec-rXP" firstAttribute="top" secondItem="dxF-22-bkP" secondAttribute="bottom" constant="78" id="BVs-Vq-B6u"/>
                             <constraint firstItem="4Dk-Xp-9V7" firstAttribute="top" secondItem="dxF-22-bkP" secondAttribute="bottom" constant="78" id="Bhg-e4-6j0"/>
                             <constraint firstItem="4Qz-wb-PPd" firstAttribute="top" secondItem="Sei-UB-dhx" secondAttribute="bottom" constant="393" id="DGs-gN-R20"/>
                             <constraint firstItem="5au-pq-Rxc" firstAttribute="top" secondItem="dxF-22-bkP" secondAttribute="bottom" constant="13" id="DTR-Tk-tgu"/>
+                            <constraint firstItem="0EW-ec-rXP" firstAttribute="leading" secondItem="Avv-ne-TXf" secondAttribute="trailing" constant="38" id="DVC-Ie-Bqx"/>
                             <constraint firstAttribute="centerX" secondItem="dxF-22-bkP" secondAttribute="centerX" id="HGq-2O-ZK8"/>
                             <constraint firstItem="4Qz-wb-PPd" firstAttribute="top" secondItem="WyH-Pl-iZy" secondAttribute="bottom" constant="393" id="Hpe-xD-K6L"/>
                             <constraint firstItem="Sei-UB-dhx" firstAttribute="top" secondItem="Q5j-kE-bRe" secondAttribute="bottom" constant="37" id="K7z-SQ-e8G"/>
@@ -192,7 +203,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="121" y="33"/>
+            <point key="canvasLocation" x="113" y="31"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
